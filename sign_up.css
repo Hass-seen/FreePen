@@ -1,0 +1,107 @@
+*{
+	margin:0;
+	padding:0;
+	font-family: sans-serif;
+	box-sizing: border-box;
+}
+body{
+	size: 100%;
+	background-image: url(sign-in.jpg);
+	background-size: cover;
+	background-repeat: no-repeat;
+}
+
+.error{
+font-size: small;
+color: red;
+display: none;
+}
+#conerror{
+	display: none;
+}
+
+
+
+
+.signe-up{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	height: 70%;
+	margin-bottom: 5%;
+}
+
+
+
+
+h6, h5,.free,.red{
+	color: #DC143C;
+}
+ 
+
+
+
+header{
+	display: flex;
+	flex-direction: row;
+	background-color: #404040;
+	font-family: sans-serif;
+	color: white;
+	padding: 10px;
+	position: relative;
+	justify-content: center;
+}
+
+h3{
+	font-family: sans-serif;
+}
+
+
+.links{
+	position: absolute;
+	right: 15px;
+}
+a{
+	color: white;
+	padding-left: 5px;
+	border-color: #101010;
+	text-decoration: none;
+
+}
+
+form{
+	margin-top: 50px;
+	text-align: center;
+	font-style: none;
+
+}
+  
+  input{
+  	display: block;
+    width: 200px;
+    height: 40px;
+    margin: 20px;
+    border:black 0.5px solid;
+    border-radius: 30px;
+    font-size: 10pt;
+    padding-left: 10px;
+    padding-right: 10px;
+    background-color: none;
+    background-color: rgba(255, 255, 255, 0.5);
+
+
+  }
+
+  .button{
+  
+  	width: 200px;
+  	height: 40px;
+  	font-size: 20px;
+  	background-color: #404040;
+  	border:none;
+  	color:white;
+  	margin-top: 30px;
+  	opacity: 1;
+
+  }
