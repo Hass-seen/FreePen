@@ -1,3 +1,14 @@
+
+
+
+<?php 
+    require "connection.php";
+
+?>
+
+
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -18,12 +29,24 @@
  
    	
    <div class="stuff">
-     	
-     <img src="pfp.png">
-     <button>uplode</button>
+     	<form method="get" enctype="multipart/form-data" >
+            <img src="pfp.png">
+           <input type="file" name="upload" accept=".png,.git,.jpg" required/>
      
+       </form>
 
 
+    <?php 
+     if (isset($_FILES['upload'])) {
+       $stmt= $conn->prepare("INSERT INTO'user'('pfp') VALUES(?)")
+        
+       $stmt->execute([file_get_contents($_FILES['upload'][temp_name])])
+
+
+     }
+
+
+    ?>
     
      	
 

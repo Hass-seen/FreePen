@@ -8,16 +8,26 @@
 <body>
 
 
+ <?php
 
+if(array_key_exists('post', $_POST)) {
+            button1();
+        }
+
+ function button1() {
+            echo "This is Button1 that is selected";
+        }
+ ?>
+  
     <div class="poster"> 
+        <form method="post">
+	      <h4>Subject:</h4>
+	      <input type="text" name="subject" id="sub"> <br>
+	       <h4>Body:</h4>
+	       <textarea id="postbody" name="body" rows="4" cols="50"></textarea><br>
+	       <button name="post">post</button> <h6 id="alert">pleas fill both inputs*</h6> <label id="cancle">Cancle</label>
 
-      <h4>Subject:</h4>
-      <input type="text" name="subject" id="sub"> <br>
-       <h4>Body:</h4>
-       <textarea id="postbody" name="body" rows="4" cols="50"></textarea><br>
-       <button>post</button> <h6 id="alert">pleas fill both inputs*</h6> <label id="cancle">Cancle</label>
-
-
+        </form>
     </div>
 
 

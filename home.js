@@ -36,6 +36,7 @@ $("#cancle").click(function(){
 	 $(".poster").css("display","none");
 });
 $(".poster button").click(function(){
+ 
   
 if($("#sub").val().trim()!="" &&$("#postbody").val().trim()!="" ){
 	var x = new post($("#sub").val(),$("#postbody").val());
