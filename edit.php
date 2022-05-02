@@ -1,8 +1,10 @@
 
 
 
-<?php 
+<?php
+    session_start(); 
     require "connection.php";
+
 
 ?>
 
@@ -38,10 +40,10 @@
 
     <?php 
      if (isset($_FILES['upload'])) {
-       $stmt= $conn->prepare("INSERT INTO'user'('pfp') VALUES(?)")
+       $stmt= $conn->prepare("INSERT INTO'user'('pfp') VALUES(?) WHERE 'email' = '$_SESSION[EMAIL]'")
         
-       $stmt->execute([file_get_contents($_FILES['upload'][temp_name])])
-
+       $stmt->execute([file_get_contents($_FILES['upload'][temp_name])]);
+        
 
      }
 
