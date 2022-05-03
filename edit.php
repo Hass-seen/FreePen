@@ -40,9 +40,9 @@
 
     <?php 
      if (isset($_FILES['upload'])) {
-       $stmt= $conn->prepare("INSERT INTO'user'('pfp') VALUES(?) WHERE 'email' = '$_SESSION[EMAIL]'")
+       $stmt= $conn->prepare("INSERT INTO'user'('pfp') VALUES(?) WHERE 'email' = '$_SESSION[EMAIL]'");
         
-       $stmt->execute([file_get_contents($_FILES['upload'][temp_name])]);
+       $stmt-> execute([file_get_contents($_FILES['upload'][temp_name])]);
         
 
      }
