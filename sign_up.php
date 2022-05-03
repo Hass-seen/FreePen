@@ -23,6 +23,7 @@ require "connection.php";
      
 
      if (isset($_POST['go'])) {
+        $image = "pfp.png";
         $fname= $_POST['firstname'];
         $lname= $_POST['lastname'];
       
@@ -31,17 +32,30 @@ require "connection.php";
        $passwo= $_POST['Password'];
 
 
-       $nmae = filter_var($name, FILTER_SANITIZE_STRING);
-       $email= filter_var($Em, FILTER_SANITIZE_EMAIL);
-       $pass = filter_var($passwo, FILTER_SANITIZE_STRING);
+       $name   = filter_var($name, FILTER_SANITIZE_STRING);
+       $email  = filter_var($Em, FILTER_SANITIZE_EMAIL);
+       $pass   = filter_var($passwo, FILTER_SANITIZE_STRING);
+       $PFP    = addslashes(file_get_contents($image));
+       $status ="......";
+       $field  ="......";
+       $bio    ="......";
 
 
        $sql= "INSERT INTO user (email,name,password,status,field,bio,pfp) VALUES(?,?,?,?,?,?,?)";
+       $stmt= $conn->prepare($sql);
+       $stmt->bind_param("ssssssb",$email,$name,$pass,$status,$field,$bio,$PFP);
+       $stmt->execute();
+       $result= $stmt->get_result();
+
+       if ($result) {
+         echo "success";
+       }else{
+        echo "fail";
+       }
+
+     };
 
      
-     }
-
-
     ?>
 </div>
     
