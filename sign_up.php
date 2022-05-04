@@ -23,17 +23,46 @@ require "connection.php";
      
 
      if (isset($_POST['go'])) {
+
+         $Em = $_POST['E-Mail'];
+         $do= True;
+
+        $email  = filter_var($Em, FILTER_SANITIZE_EMAIL);
+
+        $sql = "SELECT email FROM user";
+        $result = $conn->query($sql);
+
+        $arry = $result -> fetch_array(MYSQLI_NUM);
+        var_dump($arry);
+
+        for ($i=0; $i <count($arry); $i++) {
+
+         if($email==$arry[$i]){
+
+            $do=false;
+
+          };
+        }
+
+
+
+
+         if ($do==True) {
+          
+
+
+
         $image = "pfp.png";
         $fname= $_POST['firstname'];
         $lname= $_POST['lastname'];
       
        $name=$fname ." ".$lname;
-       $Em = $_POST['E-Mail'];
+       
        $passwo= $_POST['Password'];
 
 
        $name   = filter_var($name, FILTER_SANITIZE_STRING);
-       $email  = filter_var($Em, FILTER_SANITIZE_EMAIL);
+      
        $pass   = filter_var($passwo, FILTER_SANITIZE_STRING);
        $PFP    = addslashes(file_get_contents($image));
        $status ="......";
@@ -47,10 +76,8 @@ require "connection.php";
        $stmt->execute();
        $result= $stmt->get_result();
 
-       if ($result) {
-         echo "success";
        }else{
-        echo "fail";
+        echo "<script>alert('Email Already has an account')</script>";
        }
 
      };
