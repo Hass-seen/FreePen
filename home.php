@@ -40,9 +40,9 @@ if(array_key_exists('post', $_POST)) {
     <div class="poster"> 
         <form method="post">
 	      <h4>Subject:</h4>
-	      <input type="text" name="subject" id="sub"> <br>
+	      <input type="text" name="subject" id="sub" rows="4" cols="50" required> <br>
 	       <h4>Body:</h4>
-	       <textarea id="postbody" name="body" rows="4" cols="50"></textarea><br>
+	       <textarea id="postbody" name="body"  rows="4" cols="50" required></textarea><br>
 	       <button name="post">post</button> <h6 id="alert">pleas fill both inputs*</h6> <label id="cancle">Cancle</label>
 
         </form>
@@ -60,7 +60,8 @@ if(array_key_exists('post', $_POST)) {
 
    <div class="container" >
 	<div class="left" >
-		<img src="pfp.png" class="pfp">
+		<?php echo '<img src="data:image/jpeg;base64,'.base64_encode($user['pfp']).'" class="pfp">';?>
+	 
         <div class="personal">
         	<div class="status">
         		<h6>Name :</h6>
