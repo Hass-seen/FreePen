@@ -33,7 +33,7 @@ require "connection.php";
         $result = $conn->query($sql);
 
         $arry = $result -> fetch_array(MYSQLI_NUM);
-        var_dump($arry);
+        
 
         for ($i=0; $i <count($arry); $i++) {
 
@@ -52,7 +52,6 @@ require "connection.php";
 
 
 
-        $image = "pfp.png";
         $fname= $_POST['firstname'];
         $lname= $_POST['lastname'];
       
@@ -64,7 +63,7 @@ require "connection.php";
        $name   = filter_var($name, FILTER_SANITIZE_STRING);
       
        $pass   = filter_var($passwo, FILTER_SANITIZE_STRING);
-       $PFP    = addslashes(file_get_contents($image));
+       $PFP    = file_get_contents($_FILES["pfp"]["tmp_name"]);
        $status ="......";
        $field  ="......";
        $bio    ="......";
@@ -75,6 +74,10 @@ require "connection.php";
        $stmt->bind_param("ssssssb",$email,$name,$pass,$status,$field,$bio,$PFP);
        $stmt->execute();
        $result= $stmt->get_result();
+
+       $_SESSION['email']=$email;
+       header('Location: http://localhost/web%20project/home.php');
+       die;
 
        }else{
         echo "<script>alert('Email Already has an account')</script>";
@@ -97,7 +100,25 @@ require "connection.php";
 	
     <div class="signe-up">
 
-	<form method="post">
+
+
+
+	<form method="post" enctype="multipart/form-data">
+
+    <label for="pfp" style="width: 200px;
+    height: 40px;
+    font-size: 20px;
+    background-color: #404040;
+    border:none;
+    color:white;
+    padding: 4px;
+    border-radius: 10px;
+    margin-top: 30px;
+    opacity: 1;
+    cursor: pointer;
+"><input type="file" name="pfp" id="pfp" style="display: none;" required> uplaod profile picture</label>
+
+<br><br>
 
 		<label for="firstname" class="red">First Name</label> 
 

@@ -1,3 +1,16 @@
+<?php
+
+session_start();
+
+  $sql = "SELECT name,password,status,field,bio,pfp FROM user WHERE email=".$_SESSION['email']."";
+        $result = $conn->query($sql);
+
+       $user = $result -> fetch_array(MYSQLI_ASSOC);
+
+
+?>
+
+
 <!DOCTYPE html>
 <html>
 <head>
