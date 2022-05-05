@@ -6,7 +6,7 @@ require "connection.php";
    $email=$_SESSION['email'];
  $sql = "SELECT * FROM user WHERE email=?"; 
 $stmt = $conn->prepare($sql); 
-$stmt->bind_param("i", $id);
+$stmt->bind_param("s", $email);
 $stmt->execute();
 $result = $stmt->get_result(); 
 $user = $result->fetch_assoc();
@@ -66,17 +66,15 @@ if(array_key_exists('post', $_POST)) {
         		<h6>Name :</h6>
          <p><?php echo $user['name']?></p>
          <h6>Status :</h6>
-         <p>its a good day for a free lancer</p>
+         <p><?php echo $user['status']?></p>
 
          <h5>Field of covrage: </h5>
-         <p>im not a reporter, im just making this website</p>
+         <p><?php echo $user['field']?></p>
           </div>
 
           <div class="bio">
          <h6>Biography :</h6>
-         <p> Former Physics studant, tried my luck for 4 years, <br>
-          dropped out and then movoed to combuter sience <br>
-          and i feel im doing well, though web development is breaking my brain  </p>
+         <p> <?php echo $user['bio']?> </p>
           </div>
          </div>
 
@@ -122,7 +120,19 @@ if(array_key_exists('post', $_POST)) {
              </div>
 
 			<li class="sub">My Archives</li>
-			<li class="sub">Edit Profile</li>
+			<form method="post">
+			<li class="sub"><label for="edit" style="cursor: pointer;">Edit Profile</label> <input type="submit" name="edit" id="edit" style="display: none;"></li>
+			
+			</form>
+			<?php  
+
+              if (isset($_POST['edit'])) {
+              	$_SESSION['email']=$email;
+                     header('Location: http://localhost/web%20project/edit.php');
+                     die; 
+              }
+			    
+       ?>
 			<div class="list1">
 			<li class="sub">Subscriptions</li>
 

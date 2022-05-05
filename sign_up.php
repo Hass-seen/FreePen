@@ -50,8 +50,6 @@ require "connection.php";
          if ($do==True) {
           
 
-
-
         $fname= $_POST['firstname'];
         $lname= $_POST['lastname'];
       
