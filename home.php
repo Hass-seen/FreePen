@@ -1,11 +1,16 @@
 <?php
 
 session_start();
+require "connection.php";
 
-  $sql = "SELECT name,password,status,field,bio,pfp FROM user WHERE email=".$_SESSION['email']."";
-        $result = $conn->query($sql);
-
-       $user = $result -> fetch_array(MYSQLI_ASSOC);
+   $email=$_SESSION['email'];
+ $sql = "SELECT * FROM user WHERE email=?"; 
+$stmt = $conn->prepare($sql); 
+$stmt->bind_param("i", $id);
+$stmt->execute();
+$result = $stmt->get_result(); 
+$user = $result->fetch_assoc();
+        
 
 
 ?>
@@ -59,7 +64,7 @@ if(array_key_exists('post', $_POST)) {
         <div class="personal">
         	<div class="status">
         		<h6>Name :</h6>
-         <p>Riporter Riportson</p>
+         <p><?php echo $user['name']?></p>
          <h6>Status :</h6>
          <p>its a good day for a free lancer</p>
 
