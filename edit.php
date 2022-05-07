@@ -31,25 +31,19 @@
  
    	
    <div class="stuff">
+
+
+              <img src=<?php echo "".$user['pfp']."";?>>     
+
+
+
+
      	<form method="get" enctype="multipart/form-data" >
-            <img src="pfp.png">
-           <input type="file" name="upload" accept=".png,.git,.jpg" required/>
+          
+           <input type="file" id="pfp" name="pfp" accept=".png,.git,.jpg" style="display: none;" required/>
+          <label style="width: 100%; margin-left: 0%" for="pfp">  <input type="submit" name="upload" value="upload" style="width: 100%; padding: 2px; height: 20%;"></label>
      
        </form>
-
-
-    <?php 
-     if (isset($_FILES['upload'])) {
-       $stmt= $conn->prepare("INSERT INTO'user'('pfp') VALUES(?) WHERE 'email' = '$_SESSION[EMAIL]'");
-        
-       $stmt-> execute([file_get_contents($_FILES['upload']['temp_name'])]);
-        
-
-     }
-
-
-    ?>
-    
      	
 
        <label for="fname" class="red">First name: </label>  
