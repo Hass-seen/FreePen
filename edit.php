@@ -5,6 +5,14 @@
     session_start(); 
     require "connection.php";
 
+     $email=$_SESSION['email'];
+ $sql = "SELECT * FROM user WHERE email=?"; 
+$stmt = $conn->prepare($sql); 
+$stmt->bind_param("s", $email);
+$stmt->execute();
+$result = $stmt->get_result(); 
+$user = $result->fetch_assoc();
+
 
 ?>
 
@@ -38,12 +46,26 @@
 
 
 
-     	<form method="get" enctype="multipart/form-data" >
+     	<form method="post" enctype="multipart/form-data" >
           
            <input type="file" id="pfp" name="pfp" accept=".png,.git,.jpg" style="display: none;" required/>
-          <label style="width: 100%; margin-left: 0%" for="pfp">  <input type="submit" name="upload" value="upload" style="width: 100%; padding: 2px; height: 20%;"></label>
+          <label style="width: 100%; margin-left: 16%; border-radius: 10px; background-color: white; padding: 2px; margin-bottom: 4px; cursor: pointer;" for="pfp" > change image </label>
+          <input type="submit" name="upl" value="upload" style="width: 100%; padding: 2px; height: 20%; margin-top: 4px;">
      
        </form>
+       <?php 
+
+      if (isset($_POST['upl'])) {
+
+
+        $image=$_FILES["pfp"]["tmp_name"];
+        $PFP    = file_get_contents($image);
+        $sql = 'UPDATE user SET pfp='.$PFP.' WHERE email="'.$user['email'].'"';
+
+
+
+      }
+       ?>
      	
 
        <label for="fname" class="red">First name: </label>  
