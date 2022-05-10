@@ -38,7 +38,13 @@ $name= explode(" " , $user['name'])
 	</div>
 	</header>
  <form method="post" enctype="multipart/form-data">
-   	
+   	<script type="text/javascript">
+    function  selectimage(e){
+      var file=e.target.files[0]
+        console.log(file)
+        console.log(typeof(file))
+      }
+    </script>
    <div class="stuff">
 
 
@@ -49,7 +55,7 @@ $name= explode(" " , $user['name'])
 
      	
         
-   <input type="file" id="pfp" name="pfp" accept=".png,.git,.jpg" style="display: none;" />
+   <input type="file" id="pfp" name="pfp" accept=".png,.git,.jpg" style="display: none;"onchange="selectimage(event)" />
    <label style=" border-radius: 10px; background-color: white; padding: 2px; margin-bottom: 4px; cursor: pointer;" for="pfp" > change image </label>    
    <label for="fname" class="red">First name: </label>  
   <input type="text" style="padding: 3px;" id="fname" name="fname" required value=<?php echo $name[0];?>>
