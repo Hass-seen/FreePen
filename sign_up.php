@@ -25,32 +25,28 @@ require "connection.php";
      if (isset($_POST['go'])) {
 
          $Em = $_POST['E-Mail'];
-         $do= True;
 
         $email  = filter_var($Em, FILTER_SANITIZE_EMAIL);
 
-        $sql = "SELECT email FROM user";
-        $result = $conn->query($sql);
-
-        $arry = $result -> fetch_array(MYSQLI_NUM);
+         $sql = "SELECT * FROM user WHERE email=?"; 
+         $stmt = $conn->prepare($sql); 
+         $stmt->bind_param("s", $email);
+         $stmt->execute();
+         $result = $stmt->get_result(); 
+         $user = $result->fetch_assoc();
+        
+        
         
 
-        for ($i=0; $i <count($arry); $i++) {
+         if($user['email']!=''){
 
-         if($email==$arry[$i]){
-
-            $do=false;
-
-          };
-        }
+        echo "<script>alert('Email Already has an account')</script>";
 
 
+          }else{   
 
 
-         if ($do==True) {
-          
-
-        $fname= $_POST['firstname'];
+               $fname= $_POST['firstname'];
         $lname= $_POST['lastname'];
       
        $name=$fname ." ".$lname;
@@ -76,12 +72,11 @@ require "connection.php";
        $_SESSION['email']=$email;
        header('Location: http://localhost/web%20project/home.php');
        die;
+          };
 
-       }else{
-        echo "<script>alert('Email Already has an account')</script>";
-       }
 
-     };
+}
+  
 
      
     ?>

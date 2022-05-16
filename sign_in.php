@@ -1,3 +1,11 @@
+
+<?php
+
+session_start();
+require "connection.php";
+
+ ?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,13 +23,48 @@
 	</header>
 	</header>
     <div class="signe-in">
-	<form action="/action_page.php">
+	<form method="post">
   <label for="E-Mail" class="red">E-Mail</label>  
   <input type="text" id="E-Mail" name="E-Mail">
   <label for="Password" class="red">Password</label>
   <input type="text" id="" name="Password">
-  <input class="button" type="Submit" value="Log in">
+  <input class="button" type="Submit" name="in" value="Log in">
   </form>
+<?php 
+
+
+if (isset($_POST['in'])) {
+	         $Em = $_POST['E-Mail'];
+	         $pass= $_POST['Password'];
+
+        $email  = filter_var($Em, FILTER_SANITIZE_EMAIL);
+
+         $sql = "SELECT * FROM user WHERE email=?"; 
+         $stmt = $conn->prepare($sql); 
+         $stmt->bind_param("s", $email);
+         $stmt->execute();
+         $result = $stmt->get_result(); 
+         $user = $result->fetch_assoc();
+
+         if($user['email']!=''){
+         	if ($pass==$user['password']) {
+         		       $_SESSION['email']=$email;
+               header('Location: http://localhost/web%20project/home.php');
+             die;
+         	}else{
+         	echo "<script>alert('Password is incorect')</script>";
+         	}
+
+         }else{
+         echo "<script>alert('Account does not exist')</script>";
+            header('Location: http://localhost/web%20project/sign_up.php');
+             die;
+         }
+}
+
+
+?>
+
 
 
     </div>
