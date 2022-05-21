@@ -60,7 +60,7 @@ if(array_key_exists('post', $_POST)) {
 
    <div class="container" >
 	<div class="left" >
-		<?php echo '<img src="data:image/jpeg;base64,'.base64_encode($user['pfp']).'" class="pfp">';?>
+		<?php echo '<img src="'.$user['pfp'].'" class="pfp">';?>
 	 
         <div class="personal">
         	<div class="status">

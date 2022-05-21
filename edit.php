@@ -98,7 +98,7 @@ $name= explode(" " , $user['name'])
 
         $sql = 'UPDATE user SET name=?, status=?, bio=?, field=?, pfp=?  WHERE email=?';
         $stmt = $conn->prepare($sql); 
-        $stmt->bind_param("ssssbs",$name,$status,$bio,$feild,$PFP, $email);
+        $stmt->bind_param("ssssss",$name,$status,$bio,$feild,$PFP, $email);
         $stmt->execute(); 
 
       
@@ -108,7 +108,7 @@ $name= explode(" " , $user['name'])
 
        $sql = 'UPDATE user SET name=?, status=?, bio=?, field=?, WHERE email=?';
        $stmt = $conn->prepare($sql); 
-        $stmt->bind_param("ssssbs",$name,$status,$bio,$feild, $email);
+        $stmt->bind_param("ssssss",$name,$status,$bio,$feild, $email);
         $stmt->execute(); 
 
       }

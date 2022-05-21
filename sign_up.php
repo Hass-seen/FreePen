@@ -57,7 +57,7 @@ require "connection.php";
        $name   = filter_var($name, FILTER_SANITIZE_STRING);
       
        $pass   = filter_var($passwo, FILTER_SANITIZE_STRING);
-       $PFP    = file_get_contents($_FILES["pfp"]["tmp_name"]);
+       $PFP    ="pfps/pfp.png";
        $status ="......";
        $field  ="......";
        $bio    ="......";
@@ -65,7 +65,7 @@ require "connection.php";
 
        $sql= "INSERT INTO user (email,name,password,status,field,bio,pfp) VALUES(?,?,?,?,?,?,?)";
        $stmt= $conn->prepare($sql);
-       $stmt->bind_param("ssssssb",$email,$name,$pass,$status,$field,$bio,$PFP);
+       $stmt->bind_param("sssssss",$email,$name,$pass,$status,$field,$bio,$PFP);
        $stmt->execute();
        $result= $stmt->get_result();
 
@@ -96,23 +96,7 @@ require "connection.php";
 
 
 
-	<form method="post" enctype="multipart/form-data">
-
-    <label for="pfp" style="width: 200px;
-    height: 40px;
-    font-size: 20px;
-    background-color: #404040;
-    border:none;
-    color:white;
-    padding: 4px;
-    border-radius: 10px;
-    margin-top: 30px;
-    opacity: 1;
-    cursor: pointer;
-"><input type="file" name="pfp" id="pfp" style="display: none;" required> uplaod profile picture</label>
-
-<br><br>
-
+	<form method="post">
 		<label for="firstname" class="red">First Name</label> 
 
   <input type="text" id="firstname" name="firstname" class="clear" required>

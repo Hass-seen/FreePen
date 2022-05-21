@@ -18,7 +18,7 @@ require "connection.php";
 <header>
 		<h3><b class="free">Free</b>dom Pen</h3>
 		 <div class="links">
-		 	<a href="">contact us</a>
+      <a href="sign_up.php" id="sign-up">Sign up</a>
 	</div>
 	</header>
 	</header>
@@ -46,7 +46,7 @@ if (isset($_POST['in'])) {
          $result = $stmt->get_result(); 
          $user = $result->fetch_assoc();
 
-         if($user['email']!=''){
+         if(isset($user['email'])!=Null){
          	if ($pass==$user['password']) {
          		       $_SESSION['email']=$email;
                header('Location: http://localhost/web%20project/home.php');
@@ -56,9 +56,9 @@ if (isset($_POST['in'])) {
          	}
 
          }else{
-         echo "<script>alert('Account does not exist')</script>";
-            header('Location: http://localhost/web%20project/sign_up.php');
-             die;
+         echo "<script>alert('Account does not exist pleas sign up first');
+document.getElementById('sign-up').style.color = '#DC143C';
+         </script>";
          }
 }
 
