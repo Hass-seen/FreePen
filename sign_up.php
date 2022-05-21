@@ -70,6 +70,7 @@ require "connection.php";
        $result= $stmt->get_result();
 
        $_SESSION['email']=$email;
+       $_SESSION['posts']='all';
        header('Location: http://localhost/web%20project/home.php');
        die;
           };

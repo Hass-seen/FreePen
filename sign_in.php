@@ -49,6 +49,7 @@ if (isset($_POST['in'])) {
          if(isset($user['email'])!=Null){
          	if ($pass==$user['password']) {
          		       $_SESSION['email']=$email;
+                   $_SESSION['posts']='all';
                header('Location: http://localhost/web%20project/home.php');
              die;
          	}else{

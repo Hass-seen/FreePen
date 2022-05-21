@@ -4,12 +4,19 @@ session_start();
 require "connection.php";
 
    $email=$_SESSION['email'];
+   $display=$_SESSION['posts'];
  $sql = "SELECT * FROM user WHERE email=?"; 
 $stmt = $conn->prepare($sql); 
 $stmt->bind_param("s", $email);
 $stmt->execute();
 $result = $stmt->get_result(); 
 $user = $result->fetch_assoc();
+
+if ($display=='all') {
+	$sql = "SELECT * FROM posts ORDER BY id DESC";
+$result = $conn->query($sql);
+}
+
         
 
 
@@ -25,17 +32,6 @@ $user = $result->fetch_assoc();
 </head>
 <body>
 
-
- <?php
-
-if(array_key_exists('post', $_POST)) {
-            button1();
-        }
-
- function button1() {
-            echo "This is Button1 that is selected";
-        }
- ?>
   
     <div class="poster"> 
         <form method="post">
@@ -43,10 +39,34 @@ if(array_key_exists('post', $_POST)) {
 	      <input type="text" name="subject" id="sub" rows="4" cols="50" required> <br>
 	       <h4>Body:</h4>
 	       <textarea id="postbody" name="body"  rows="4" cols="50" required></textarea><br>
-	       <button name="post">post</button> <h6 id="alert">pleas fill both inputs*</h6> <label id="cancle">Cancle</label>
+	       <input type="submit" name="post" value="post"> <h6 id="alert">pleas fill both inputs*</h6> <label id="cancle">Cancle</label>
 
         </form>
+        <?php
+
+        if (isset($_POST['post'])) {
+        	$subject=$_POST['subject'];
+        	$body=$_POST['body'];
+        	$sub= filter_var($subject, FILTER_SANITIZE_STRING);
+        	$bo= filter_var($body, FILTER_SANITIZE_STRING);
+        	$mail=$user['email'];
+        	$na=$user['name'];
+        	$likes=0;
+        	$pdf='';
+
+       $sql2= "INSERT INTO posts (email,subject,body,likes,pdf,name) VALUES(?,?,?,?,?,?)";
+       $stmt2= $conn->prepare($sql2);
+       $stmt2->bind_param("sssiss",$mail,$sub,$bo,$likes,$pdf,$na);
+       $stmt2->execute();
+       $posted=$stmt2;
+       header('Location: http://localhost/web%20project/home.php');
+
+        }
+
+
+        ?>
     </div>
+
 
 
 
@@ -96,9 +116,22 @@ if(array_key_exists('post', $_POST)) {
 
 		</div>
 		<div class="posts">
-			
+			<?php if($result->num_rows > 0) {
+  // output data of each row
+  while($row = $result->fetch_assoc()) {
+  echo'<div class="feed">
+
+<h2>'.$row['name'].'</h2>
+<h6>'.$row['email'].'</h6> <br>
+  <h4>'.$row['subject'].'</h4>
+  <div id="wrapper"><p>'.$row['body'].'</p></div>
+  <button id="button" class="like-btn"><span>'.$row['likes'].'</span>
+  <span style="margin-left:10px">upvote</span></button></div>' ;
+  }
+}?>
   
    </div>
+
 </div>
 		
 	</div>
