@@ -67,6 +67,7 @@ $result = $conn->query($sql);
        $stmt2->execute();
        $posted=$stmt2;
        header('Location: http://localhost/web%20project/home.php');
+       die;
 
         }
 
@@ -129,10 +130,7 @@ $result = $conn->query($sql);
           	 $_SESSION['word']='';
              header('Location: http://localhost/web%20project/home.php');
              die;
-          }
-
-
-			?>
+          }?>
 		</div>
 		<div class="posts">
 
@@ -165,7 +163,34 @@ $result = $conn->query($sql);
 
   }
   $_SESSION['word']='';
-}?>
+}
+
+		if (isset($_POST['tren'])) {
+			   $_SESSION['posts']='tren';
+               header('Location: http://localhost/web%20project/home.php');
+               die;}
+
+
+               			if (isset($_POST['srch'])) {
+				$_SESSION['word']= $_POST['srch'];
+				$_SESSION['posts']="all";
+				header('Location:http://localhost/web%20project/home.php');
+                die;
+
+			}
+
+						if (isset($_POST['arch'])) {
+			   $_SESSION['posts']='arch';
+               header('Location: http://localhost/web%20project/home.php');
+               die;
+			}
+
+			              if (isset($_POST['edit'])) {
+              	$_SESSION['email']=$email;
+                     header('Location: http://localhost/web%20project/edit.php');
+                     die; 
+              }
+?>
   
    </div>
 
@@ -180,17 +205,6 @@ $result = $conn->query($sql);
 			<input type="submit" name="tren" id="tren" style="display: none;">
 			</form>
 
-			<?php
-			if (isset($_POST['tren'])) {
-			   $_SESSION['posts']='tren';
-               header('Location: http://localhost/web%20project/home.php');
-               die;
-			}
-
-
-
-
-			?>
 			<form method="post">
 			<div class="search">
 			<li class="sub" >Search</li>
@@ -198,16 +212,6 @@ $result = $conn->query($sql);
              </div>
               <div class="list1">
 			</form>
-			<?php 
-			if (isset($_POST['srch'])) {
-				$_SESSION['word']= $_POST['srch'];
-				$_SESSION['posts']="all";
-				header('Location: http://localhost/web%20project/home.php');
-                die;
-
-			}
-
-			?>
 			<li class="sub">Notifications</li>
             <ul class="submen"><li>notif1</li>
 				              <li>notif2</li>
@@ -218,30 +222,10 @@ $result = $conn->query($sql);
 
 			<li class="sub"><label for="arch" style="cursor: pointer">My Archives</label></li>
 			<input type="submit" name="arch" id="arch" style="display: none;">
-			<?php
-			if (isset($_POST['arch'])) {
-			   $_SESSION['posts']='arch';
-               header('Location: http://localhost/web%20project/home.php');
-               die;
-			}
-
-
-
-
-			?>
 			<form method="post">
 			<li class="sub"><label for="edit" style="cursor: pointer;">Edit Profile</label> <input type="submit" name="edit" id="edit" style="display: none;"></li>
 			
 			</form>
-			<?php  
-
-              if (isset($_POST['edit'])) {
-              	$_SESSION['email']=$email;
-                     header('Location: http://localhost/web%20project/edit.php');
-                     die; 
-              }
-			    
-       ?>
 			<div class="list1">
 			<li class="sub">Subscriptions</li>
 

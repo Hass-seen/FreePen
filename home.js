@@ -92,30 +92,6 @@ for (var i = trenpo.length-1; i >=0 ; i--) {
 
 
 
-$("#srch").on('keypress',function(e) {
-    if(e.which == 13) {
-       var keyword= $("#srch").val();
-
-       $('.posts').html("");
-
-       for (var i = posts.length - 1; i >= 0; i--) {
-        for (var j = posts[i].content.length - 1; j >= 0; j--) {
-
-          if(posts[i].content[j]==keyword){
-              $(".posts").prepend(
-     '<div class="feed"><h4>'+posts[i].subject+'</h4><div id="wrapper"><p>'+posts[i].text+'</p></div><button id="button-'+posts.length+'" class="like-btn" data-postId="'+(posts.length-1)+'"><span>0</span><span style="margin-left:10px">upvote</span></button></div>' );
-
-          break;
-          }
-          
-        }
-
-
-
-
-       }
-    }
-});
 
 
 $("#refresh").click(function(){
