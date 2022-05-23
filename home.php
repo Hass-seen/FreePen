@@ -15,6 +15,10 @@ $user = $result->fetch_assoc();
 if ($display=='all') {
 	$sql = "SELECT * FROM posts ORDER BY id DESC";
 $result = $conn->query($sql);
+}else if ($display=='arch') {
+	$sql = "SELECT * FROM posts WHERE email= '$email' ORDER BY id DESC";
+	$result = $conn->query($sql);
+ 
 }
 
         
@@ -137,6 +141,7 @@ $result = $conn->query($sql);
 	</div>
 
 	<div class="right">
+		<form method="post">
 		<ul>
 			<li class="sub" id="trend">Treding</li>
 			<div class="search">
@@ -153,7 +158,19 @@ $result = $conn->query($sql);
 			</ul>
              </div>
 
-			<li class="sub">My Archives</li>
+			<li class="sub"><label for="arch">My Archives</label></li>
+			<input type="submit" name="arch" id="arch" style="display: none;">
+			<?php
+			if (isset($_POST['arch'])) {
+			   $_SESSION['posts']='arch';
+               header('Location: http://localhost/web%20project/home.php');
+               die;
+			}
+
+
+
+
+			?>
 			<form method="post">
 			<li class="sub"><label for="edit" style="cursor: pointer;">Edit Profile</label> <input type="submit" name="edit" id="edit" style="display: none;"></li>
 			
@@ -175,6 +192,7 @@ $result = $conn->query($sql);
 				              <li>person2</li>
 
 			</ul>
+			</form>
 			</div>
 			
 
