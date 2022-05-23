@@ -19,6 +19,9 @@ $result = $conn->query($sql);
 	$sql = "SELECT * FROM posts WHERE email= '$email' ORDER BY id DESC";
 	$result = $conn->query($sql);
  
+}else if ($display=='tren') {
+	$sql = "SELECT * FROM posts WHERE likes>0 ORDER BY likes DESC";
+	$result = $conn->query($sql);
 }
 
         
@@ -110,28 +113,58 @@ $result = $conn->query($sql);
 	<div class="center">
 	<div>
 		<div class="head">
-
+<form method="post">
 			<ul>
-				<li><img src="zoom.png" id="zoom"></i></li>
-				<li><img src="refresh.png" id="refresh"></li>
-				<li><img src="upload.png" id="upload"></li>
+				<li style="cursor: pointer;"><img src="zoom.png" id="zoom"></i></li>
+				<li><label for="ref" style="cursor: pointer;"><img src="refresh.png" id="refresh"></label></li>
+				<input type="submit" name="ref" id="ref" style="display: none;">
+				<li style="cursor: pointer;"><img src="upload.png" id="upload"></li>
 			</ul>
 
+</form>
+			<?php
+			
+          if (isset($_POST['ref'])) {
+          	 $_SESSION['posts']='all';
+          	 $_SESSION['word']='';
+             header('Location: http://localhost/web%20project/home.php');
+             die;
+          }
 
+
+			?>
 		</div>
 		<div class="posts">
-			<?php if($result->num_rows > 0) {
-  // output data of each row
-  while($row = $result->fetch_assoc()) {
-  echo'<div class="feed">
 
-<h2>'.$row['name'].'</h2>
+			<?php if($result->num_rows > 0) {
+
+  while($row = $result->fetch_assoc()) {
+  	if ($_SESSION['word']=='') {
+  		  echo'<div class="feed">
+<a href="visit.html?id='.$row['email'].'" style="color: black"><h2>'.$row['name'].'</h2></a>
+
 <h6>'.$row['email'].'</h6> <br>
   <h4>'.$row['subject'].'</h4>
   <div id="wrapper"><p>'.$row['body'].'</p></div>
   <button id="button" class="like-btn"><span>'.$row['likes'].'</span>
   <span style="margin-left:10px">upvote</span></button></div>' ;
+  	}else{
+
+		 if(strpos($row['body'], $_SESSION['word'])!== false){
+		      		  echo'<div class="feed">
+
+       <a href="visit.html?id='.$row['email'].'" style="color: black"><h2>'.$row['name'].'</h2></a>
+					<h6>'.$row['email'].'</h6> <br>
+					  <h4>'.$row['subject'].'</h4>
+					  <div id="wrapper"><p>'.$row['body'].'</p></div>
+					  <button id="button" class="like-btn"><span>'.$row['likes'].'</span>
+					  <span style="margin-left:10px">upvote</span></button></div>' ;
+		}
+		  	
+		  	}
+
   }
+  $_SESSION['word']='';
 }?>
   
    </div>
@@ -141,15 +174,40 @@ $result = $conn->query($sql);
 	</div>
 
 	<div class="right">
-		<form method="post">
+		<form method="post" >
 		<ul>
-			<li class="sub" id="trend">Treding</li>
+			<li class="sub" id="trend"><label for="tren" style="cursor: pointer">Treding</label></li>
+			<input type="submit" name="tren" id="tren" style="display: none;">
+			</form>
+
+			<?php
+			if (isset($_POST['tren'])) {
+			   $_SESSION['posts']='tren';
+               header('Location: http://localhost/web%20project/home.php');
+               die;
+			}
+
+
+
+
+			?>
+			<form method="post">
 			<div class="search">
 			<li class="sub" >Search</li>
 			  <input type="text" id="srch" name="srch">
              </div>
               <div class="list1">
+			</form>
+			<?php 
+			if (isset($_POST['srch'])) {
+				$_SESSION['word']= $_POST['srch'];
+				$_SESSION['posts']="all";
+				header('Location: http://localhost/web%20project/home.php');
+                die;
 
+			}
+
+			?>
 			<li class="sub">Notifications</li>
             <ul class="submen"><li>notif1</li>
 				              <li>notif2</li>
@@ -158,7 +216,7 @@ $result = $conn->query($sql);
 			</ul>
              </div>
 
-			<li class="sub"><label for="arch">My Archives</label></li>
+			<li class="sub"><label for="arch" style="cursor: pointer">My Archives</label></li>
 			<input type="submit" name="arch" id="arch" style="display: none;">
 			<?php
 			if (isset($_POST['arch'])) {
@@ -192,7 +250,7 @@ $result = $conn->query($sql);
 				              <li>person2</li>
 
 			</ul>
-			</form>
+
 			</div>
 			
 

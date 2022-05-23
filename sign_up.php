@@ -71,6 +71,7 @@ require "connection.php";
 
        $_SESSION['email']=$email;
        $_SESSION['posts']='all';
+       $_SESSION['word']='';
        header('Location: http://localhost/web%20project/home.php');
        die;
           };

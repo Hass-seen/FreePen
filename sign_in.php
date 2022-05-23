@@ -50,6 +50,7 @@ if (isset($_POST['in'])) {
          	if ($pass==$user['password']) {
          		       $_SESSION['email']=$email;
                    $_SESSION['posts']='all';
+                   $_SESSION['word']='';
                header('Location: http://localhost/web%20project/home.php');
              die;
          	}else{
