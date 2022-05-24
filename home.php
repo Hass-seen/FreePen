@@ -24,7 +24,40 @@ $result = $conn->query($sql);
 	$result = $conn->query($sql);
 }
 
-        
+     
+          if (isset($_POST['ref'])) {
+          	 $_SESSION['posts']='all';
+          	 $_SESSION['word']='';
+             header('Location: http://localhost/web%20project/home.php');
+             die;
+          }
+
+		if (isset($_POST['tren'])) {
+			   $_SESSION['posts']='tren';
+               header('Location: http://localhost/web%20project/home.php');
+               die;
+           }
+
+
+               	if (isset($_POST['srch'])) {
+				$_SESSION['word']= $_POST['srch'];
+				$_SESSION['posts']="all";
+				header('Location:http://localhost/web%20project/home.php');
+                die;
+
+			}
+
+			if (isset($_POST['arch'])) {
+			   $_SESSION['posts']='arch';
+               header('Location:http://localhost/web%20project/home.php');
+               die;
+			}
+
+			 if (isset($_POST['edit'])) {
+              	     $_SESSION['email']=$email;
+                     header('Location:http://localhost/web%20project/edit.php');
+                     die; 
+              }   
 
 
 ?>
@@ -111,11 +144,11 @@ $result = $conn->query($sql);
 	</div>
 
 
-	<div class="center">
+	<div class="center" style="overflow-x: hidden;">
 	<div>
-		<div class="head">
+		<div class="head" style=" width: 100%">
 <form method="post">
-			<ul>
+			<ul >
 				<li style="cursor: pointer;"><img src="zoom.png" id="zoom"></i></li>
 				<li><label for="ref" style="cursor: pointer;"><img src="refresh.png" id="refresh"></label></li>
 				<input type="submit" name="ref" id="ref" style="display: none;">
@@ -123,15 +156,7 @@ $result = $conn->query($sql);
 			</ul>
 
 </form>
-			<?php
-			
-          if (isset($_POST['ref'])) {
-          	 $_SESSION['posts']='all';
-          	 $_SESSION['word']='';
-             header('Location: http://localhost/web%20project/home.php');
-             die;
-          }?>
-		</div>
+	</div>
 		<div class="posts">
 
 			<?php if($result->num_rows > 0) {
@@ -165,31 +190,7 @@ $result = $conn->query($sql);
   $_SESSION['word']='';
 }
 
-		if (isset($_POST['tren'])) {
-			   $_SESSION['posts']='tren';
-               header('Location: http://localhost/web%20project/home.php');
-               die;}
 
-
-               			if (isset($_POST['srch'])) {
-				$_SESSION['word']= $_POST['srch'];
-				$_SESSION['posts']="all";
-				header('Location:http://localhost/web%20project/home.php');
-                die;
-
-			}
-
-						if (isset($_POST['arch'])) {
-			   $_SESSION['posts']='arch';
-               header('Location: http://localhost/web%20project/home.php');
-               die;
-			}
-
-			              if (isset($_POST['edit'])) {
-              	$_SESSION['email']=$email;
-                     header('Location: http://localhost/web%20project/edit.php');
-                     die; 
-              }
 ?>
   
    </div>
@@ -198,7 +199,7 @@ $result = $conn->query($sql);
 		
 	</div>
 
-	<div class="right">
+	<div class="right" style="	height: 50vh;">
 		<form method="post" >
 		<ul>
 			<li class="sub" id="trend"><label for="tren" style="cursor: pointer">Treding</label></li>
@@ -212,28 +213,16 @@ $result = $conn->query($sql);
              </div>
               <div class="list1">
 			</form>
-			<li class="sub">Notifications</li>
-            <ul class="submen"><li>notif1</li>
-				              <li>notif2</li>
-				              <li>notif2</li>
 
-			</ul>
              </div>
 
-			<li class="sub"><label for="arch" style="cursor: pointer">My Archives</label></li>
+			<li class="sub"><label for="arch" style="cursor: pointer">My Posts</label></li>
 			<input type="submit" name="arch" id="arch" style="display: none;">
 			<form method="post">
 			<li class="sub"><label for="edit" style="cursor: pointer;">Edit Profile</label> <input type="submit" name="edit" id="edit" style="display: none;"></li>
 			
 			</form>
 			<div class="list1">
-			<li class="sub">Subscriptions</li>
-
-
-			<ul class="submen"><li>person1</li>
-				              <li>person2</li>
-
-			</ul>
 
 			</div>
 			

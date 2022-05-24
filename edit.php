@@ -64,11 +64,11 @@ $name= explode(" " , $user['name'])
   <input type="text" style="padding: 3px;" id="status" name="status" >
 
   <label for="cov" class="red">Field of covrage:</label>  
-  <textarea id="cov" name="cov"  rows="4" cols="50" style="border-radius: 10px; padding: 3px;"></textarea><br>
+  <textarea id="cov" name="cov"  rows="4" cols="50" style="border-radius: 10px; padding: 3px; width: 40%"></textarea><br>
 
 
   <label for="bio" class="red">Biofraphy</label>  
-  <textarea id="bio" name="bio"  rows="4" cols="50" style="border-radius: 10px;padding: 3px;"></textarea><br>
+  <textarea id="bio" name="bio"  rows="4" cols="50" style="border-radius: 10px;padding: 3px; width: 40%"></textarea><br>
 
   <input type="submit" name="go" value="Save">
 
@@ -143,8 +143,7 @@ $name= explode(" " , $user['name'])
         $stmt->execute(); 
 
                 header('Location: http://localhost/web%20project/home.php'); 
-        die;
-
+                 die;
           }else{
              echo "<script>alert('there was an error uploading your profile picture')</script>";
           }
