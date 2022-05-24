@@ -350,7 +350,7 @@ h6,h4, h5,.free{
 
 
 
-@media only screen and (max-width: 500px){
+@media only screen and (max-width: 600px){
 
 .container{
 	margin-top: 1%;
@@ -360,6 +360,7 @@ h6,h4, h5,.free{
 }
 
 .left{
+	position: relative;
 	
 	display: flex;
 	flex-direction: column;
@@ -375,12 +376,13 @@ h6,h4, h5,.free{
 
 
 .right{
+	position: relative;
 	margin-bottom: 3%;
 	padding-bottom: 3%;
 }
 
 .center{
-
+	position: relative;
 	order: 3;
 	height: 100vh;
 	margin-bottom: 10%;
@@ -451,10 +453,59 @@ li:hover{
 }
 
 
-@media only screen and (max-width: 1000px){
+@media only screen and (max-width: 900px) and (min-width: 601px){
+
+
+body{
+	position: relative;
+}
 
 
 
+.right{
+	position: absolute;
+	right: 2%;
+	width: 20%;
 
+}
+.bio{
+	width: 30%;
+	order: 3;
+	margin-top: 2%;
+	margin-left: 38%;
+	margin-right: 2%;
+}
+
+
+.left{
+	position: absolute;
+	left: 2%;
+	width: 70%;
+	height: 50vh;
+	display: flex;
+	flex-direction: column;
+
+	margin-bottom: 3%;
+}
+
+
+.left img{
+	align-self: center;
+	height: 30%;
+	width: 30%;
+}
+.personal{
+	display: flex;
+	flex-direction: row;
 	
+}
+.center{
+	position: absolute;
+	top: 60vh;
+	width: 80%;
+	order: 3;
+	height: 100vh;
+	margin-bottom: 10%;
+}
+
 }
