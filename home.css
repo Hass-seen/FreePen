@@ -366,12 +366,15 @@ h6,h4, h5,.free{
 	flex-direction: column;
 
 	margin-bottom: 3%;
+	margin-left: 2%;
+	margin-right: 2%;
 }
 
 
 .left img{
 	align-self: center;
 	height: 30%;
+	margin-left: 0;
 }
 
 
@@ -379,6 +382,8 @@ h6,h4, h5,.free{
 	position: relative;
 	margin-bottom: 3%;
 	padding-bottom: 3%;
+		margin-left: 2%;
+	margin-right: 2%;
 }
 
 .center{
@@ -386,6 +391,8 @@ h6,h4, h5,.free{
 	order: 3;
 	height: 100vh;
 	margin-bottom: 10%;
+		margin-left: 2%;
+	margin-right: 2%;
 }
 
 .center ul{
@@ -467,6 +474,7 @@ body{
 	right: 2%;
 	width: 20%;
 
+
 }
 .bio{
 	width: 30%;
@@ -493,6 +501,7 @@ body{
 	align-self: center;
 	height: 30%;
 	width: 30%;
+	margin-left: 0;
 }
 .personal{
 	display: flex;
