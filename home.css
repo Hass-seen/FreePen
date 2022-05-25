@@ -471,8 +471,9 @@ body{
 
 .right{
 	position: absolute;
-	right: 2%;
+	right: 5%;
 	width: 20%;
+	top: 12vh;
 
 
 }
@@ -480,16 +481,16 @@ body{
 	width: 30%;
 	order: 3;
 	margin-top: 2%;
-	margin-left: 38%;
+	margin-left: 30%;
 	margin-right: 2%;
 }
 
 
 .left{
 	position: absolute;
-	left: 2%;
-	width: 70%;
-	height: 50vh;
+	left: 5%;
+	width: 65%;
+	height: 60vh;
 	display: flex;
 	flex-direction: column;
 
@@ -500,7 +501,7 @@ body{
 .left img{
 	align-self: center;
 	height: 30%;
-	width: 30%;
+	width: 20%;
 	margin-left: 0;
 }
 .personal{
@@ -510,8 +511,8 @@ body{
 }
 .center{
 	position: absolute;
-	top: 60vh;
-	width: 80%;
+	top: 70vh;
+	width: 90%;
 	order: 3;
 	height: 100vh;
 	margin-bottom: 10%;

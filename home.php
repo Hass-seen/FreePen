@@ -159,18 +159,20 @@ $result = $conn->query($sql);
 	</div>
 		<div class="posts">
 
+
 			<?php if($result->num_rows > 0) {
 
   while($row = $result->fetch_assoc()) {
   	if ($_SESSION['word']=='') {
   		  echo'<div class="feed">
-<a href="visit.html?id='.$row['email'].'" style="color: black"><h2>'.$row['name'].'</h2></a>
+<a href="visit.php?id='.$row['email'].'" style="color: black"><h2>'.$row['name'].'</h2></a>
 
 <h6>'.$row['email'].'</h6> <br>
   <h4>'.$row['subject'].'</h4>
   <div id="wrapper"><p>'.$row['body'].'</p></div>
-  <button id="button" class="like-btn"><span>'.$row['likes'].'</span>
-  <span style="margin-left:10px">upvote</span></button></div>' ;
+  <button id="button" for="p'.$row['id'].'" class="like-btn"><span>'.$row['likes'].'</span>
+  <span style="margin-left:10px">upvote</span></button></div>
+  			<a href="likes.php?id='.$row['id'].'" id="p'.$row['id'].'">likw</a>' ;
   	}else{
 
 		 if(strpos($row['body'], $_SESSION['word'])!== false){
