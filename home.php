@@ -152,13 +152,12 @@ $result = $conn->query($sql);
 				<li style="cursor: pointer;"><img src="zoom.png" id="zoom"></i></li>
 				<li><label for="ref" style="cursor: pointer;"><img src="refresh.png" id="refresh"></label></li>
 				<input type="submit" name="ref" id="ref" style="display: none;">
-				<li style="cursor: pointer;"><img src="upload.png" id="upload"></li>
+				<li style="cursor: pointer;" ><img src="upload.png" id="upload"></li>
 			</ul>
 
 </form>
 	</div>
 		<div class="posts">
-
 
 			<?php if($result->num_rows > 0) {
 
@@ -170,9 +169,8 @@ $result = $conn->query($sql);
 <h6>'.$row['email'].'</h6> <br>
   <h4>'.$row['subject'].'</h4>
   <div id="wrapper"><p>'.$row['body'].'</p></div>
-  <button id="button" for="p'.$row['id'].'" class="like-btn"><span>'.$row['likes'].'</span>
-  <span style="margin-left:10px">upvote</span></button></div>
-  			<a href="likes.php?id='.$row['id'].'" id="p'.$row['id'].'">likw</a>' ;
+  <a href="likes.php?id='.$row['id'].'" id="p'.$row['id'].'" style="border-radius: 10px; border:2px black solid; padding:2px 4px; background-color: darkgray" ><span>'.$row['likes'].'</span>
+  <span style="margin-left:10px">upvote</span></a></div>';
   	}else{
 
 		 if(strpos($row['body'], $_SESSION['word'])!== false){
