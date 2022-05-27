@@ -83,8 +83,8 @@ $user = $result->fetch_assoc();
 <h6>'.$row['email'].'</h6> <br>
   <h4>'.$row['subject'].'</h4>
   <div id="wrapper"><p>'.$row['body'].'</p></div>
-  <button id="button" class="like-btn"><span>'.$row['likes'].'</span>
-  <span style="margin-left:10px">upvote</span></button></div>' ;
+ <a href="likes.php?id='.$row['id'].'" id="p'.$row['id'].'" style="border-radius: 10px; border:2px black solid; padding:2px 4px; background-color: darkgray" ><span>'.$row['likes'].'</span>
+  <span style="margin-left:10px">upvote</span></a></div>' ;
 
   }}
 

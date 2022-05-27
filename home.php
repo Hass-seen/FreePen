@@ -74,11 +74,13 @@ $result = $conn->query($sql);
 
   
     <div class="poster"> 
-        <form method="post">
+        <form method="post" enctype="multipart/form-data">
 	      <h4>Subject:</h4>
 	      <input type="text" name="subject" id="sub" rows="4" cols="50" required> <br>
 	       <h4>Body:</h4>
-	       <textarea id="postbody" name="body"  rows="4" cols="50" required></textarea><br>
+	       <textarea id="postbody" name="body"  rows="4" cols="50" style="width: 100%" required></textarea><br>
+	          <input type="file" id="file" name="pdf" accept=".pdf" style="display: none;" />
+   <label style=" border-radius: 10px; background-color: white; padding: 2px; margin-bottom: 4px; cursor: pointer;" for="file" > change image </label> <br><br>
 	       <input type="submit" name="post" value="post"> <h6 id="alert">pleas fill both inputs*</h6> <label id="cancle">Cancle</label>
 
         </form>
@@ -93,16 +95,63 @@ $result = $conn->query($sql);
         	$na=$user['name'];
         	$likes=0;
         	$pdf='';
+         if($_FILES['pdf']['tmp_name']!=""){
+        $file=$_FILES["pdf"];
+        $fileName=$_FILES["pdf"]['name'];
+        $fileTmpName=$_FILES["pdf"]['tmp_name'];
+        $fileSize=$_FILES["pdf"]['size'];
+        $fileError=$_FILES["pdf"]['error'];
+
+        $fileExt=explode('.', $fileName);
+
+        $fileActualExt= strtolower(end($fileExt));
+
+        $allowed= array('pdf');
+
+        if (in_array($fileActualExt, $allowed)) {
+
+          if ($fileError===0) {
+
+            $fileNameNew=uniqid('',true).'.'.$fileActualExt;
+
+            $fileDestination='pdfs/'.$fileNameNew;
+
+            move_uploaded_file($fileTmpName, $fileDestination);
+
+
+        $sql2= "INSERT INTO posts (email,subject,body,likes,pdf,name) VALUES(?,?,?,?,?,?)";
+       $stmt2= $conn->prepare($sql2);
+       $stmt2->bind_param("sssiss",$mail,$sub,$bo,$likes,$fileDestination,$na);
+       $stmt2->execute();
+       $posted=$stmt2;
+      # header('Location: http://localhost/web%20project/home.php');
+      # die;
+ 
+
+                header('Location: http://localhost/web%20project/home.php'); 
+                 die;
+          }else{
+             echo "<script>alert('there was an error uploading your profile picture')</script>";
+          }
+
+          
+        }else{
+          echo "<script>alert('extention incorrect for profile picture')</script>";
+        }
+
+      }else{
+
 
        $sql2= "INSERT INTO posts (email,subject,body,likes,pdf,name) VALUES(?,?,?,?,?,?)";
        $stmt2= $conn->prepare($sql2);
        $stmt2->bind_param("sssiss",$mail,$sub,$bo,$likes,$pdf,$na);
        $stmt2->execute();
        $posted=$stmt2;
-       header('Location: http://localhost/web%20project/home.php');
-       die;
+       // header('Location: http://localhost/web%20project/home.php');
+       // die;
 
         }
+    }
 
 
         ?>
@@ -180,14 +229,13 @@ $result = $conn->query($sql);
 					<h6>'.$row['email'].'</h6> <br>
 					  <h4>'.$row['subject'].'</h4>
 					  <div id="wrapper"><p>'.$row['body'].'</p></div>
-					  <button id="button" class="like-btn"><span>'.$row['likes'].'</span>
-					  <span style="margin-left:10px">upvote</span></button></div>' ;
+ <a href="likes.php?id='.$row['id'].'" id="p'.$row['id'].'" style="border-radius: 10px; border:2px black solid; padding:2px 4px; background-color: darkgray" ><span>'.$row['likes'].'</span>
+  <span style="margin-left:10px">upvote</span></a></div>' ;
 		}
 		  	
 		  	}
 
   }
-  $_SESSION['word']='';
 }
 
 
