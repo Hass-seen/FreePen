@@ -212,25 +212,57 @@ $result = $conn->query($sql);
 
   while($row = $result->fetch_assoc()) {
   	if ($_SESSION['word']=='') {
+  		if ($row['pdf']!='') {
   		  echo'<div class="feed">
 <a href="visit.php?id='.$row['email'].'" style="color: black"><h2>'.$row['name'].'</h2></a>
 
 <h6>'.$row['email'].'</h6> <br>
   <h4>'.$row['subject'].'</h4>
-  <div id="wrapper"><p>'.$row['body'].'</p></div>
+  <div id="wrapper"><p>'.$row['body'].'</p></div><br><br>
+  <a href="'.$row['pdf'].'" target="_blank"><img src="pdf.png" style="   height: 50px;
+   width: 50px;"></a>
   <a href="likes.php?id='.$row['id'].'" id="p'.$row['id'].'" style="border-radius: 10px; border:2px black solid; padding:2px 4px; background-color: darkgray" ><span>'.$row['likes'].'</span>
   <span style="margin-left:10px">upvote</span></a></div>';
+      }else{
+        		  echo'<div class="feed">
+<a href="visit.php?id='.$row['email'].'" style="color: black"><h2>'.$row['name'].'</h2></a>
+
+<h6>'.$row['email'].'</h6> <br>
+  <h4>'.$row['subject'].'</h4>
+  <div id="wrapper"><p>'.$row['body'].'</p></div><br><br>
+  <a href="likes.php?id='.$row['id'].'" id="p'.$row['id'].'" style="border-radius: 10px; border:2px black solid; padding:2px 4px; background-color: darkgray" ><span>'.$row['likes'].'</span>
+  <span style="margin-left:10px">upvote</span></a></div>';
+
+
+}
+
   	}else{
 
 		 if(strpos($row['body'], $_SESSION['word'])!== false){
-		      		  echo'<div class="feed">
+		  		if ($row['pdf']!='') {
+		  		  echo'<div class="feed">
+		<a href="visit.php?id='.$row['email'].'" style="color: black"><h2>'.$row['name'].'</h2></a>
 
-       <a href="visit.html?id='.$row['email'].'" style="color: black"><h2>'.$row['name'].'</h2></a>
-					<h6>'.$row['email'].'</h6> <br>
-					  <h4>'.$row['subject'].'</h4>
-					  <div id="wrapper"><p>'.$row['body'].'</p></div>
- <a href="likes.php?id='.$row['id'].'" id="p'.$row['id'].'" style="border-radius: 10px; border:2px black solid; padding:2px 4px; background-color: darkgray" ><span>'.$row['likes'].'</span>
-  <span style="margin-left:10px">upvote</span></a></div>' ;
+		<h6>'.$row['email'].'</h6> <br>
+		  <h4>'.$row['subject'].'</h4>
+		  <div id="wrapper"><p>'.$row['body'].'</p></div><br><br>
+		  <a href="'.$row['pdf'].'" target="_blank"><img src="pdf.png" style="   height: 50px;
+		   width: 50px;"></a>
+		  <a href="likes.php?id='.$row['id'].'" id="p'.$row['id'].'" style="border-radius: 10px; border:2px black solid; padding:2px 4px; background-color: darkgray" ><span>'.$row['likes'].'</span>
+		  <span style="margin-left:10px">upvote</span></a></div>';
+		      }else{
+		        		  echo'<div class="feed">
+		<a href="visit.php?id='.$row['email'].'" style="color: black"><h2>'.$row['name'].'</h2></a>
+
+		<h6>'.$row['email'].'</h6> <br>
+		  <h4>'.$row['subject'].'</h4>
+		  <div id="wrapper"><p>'.$row['body'].'</p></div><br><br>
+		  <a href="likes.php?id='.$row['id'].'" id="p'.$row['id'].'" style="border-radius: 10px; border:2px black solid; padding:2px 4px; background-color: darkgray" ><span>'.$row['likes'].'</span>
+		  <span style="margin-left:10px">upvote</span></a></div>';
+
+
+		}
+
 		}
 		  	
 		  	}
