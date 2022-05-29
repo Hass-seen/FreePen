@@ -34,6 +34,7 @@ $result = $conn->query($sql);
 
 		if (isset($_POST['tren'])) {
 			   $_SESSION['posts']='tren';
+			   $_SESSION['word']='';
                header('Location: http://localhost/web%20project/home.php');
                die;
            }
@@ -49,6 +50,7 @@ $result = $conn->query($sql);
 
 			if (isset($_POST['arch'])) {
 			   $_SESSION['posts']='arch';
+			   $_SESSION['word']='';
                header('Location:http://localhost/web%20project/home.php');
                die;
 			}
@@ -80,7 +82,7 @@ $result = $conn->query($sql);
 	       <h4>Body:</h4>
 	       <textarea id="postbody" name="body"  rows="4" cols="50" style="width: 100%" required></textarea><br>
 	          <input type="file" id="file" name="pdf" accept=".pdf" style="display: none;" />
-   <label style=" border-radius: 10px; background-color: white; padding: 2px; margin-bottom: 4px; cursor: pointer;" for="file" > change image </label> <br><br>
+   <label style=" cursor: pointer; border-radius: 10px" for="file" > <img src="pdf.png" style="height: 30px; width: 30px"> </label> <br><br>
 	       <input type="submit" name="post" value="post"> <h6 id="alert">pleas fill both inputs*</h6> <label id="cancle">Cancle</label>
 
         </form>
