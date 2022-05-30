@@ -226,7 +226,7 @@ $result = $conn->query($sql);
 		   width: 40px;"></a>
 		  <a href="likes.php?id='.$row['id'].'" id="p'.$row['id'].'" style="border-radius: 10px; border:2px black solid; padding:2px 4px; background-color: darkgray" ><span>'.$row['likes'].'</span>
 		  <span style="margin-left:10px">upvote</span></a>
-          <a href="likes.php?id='.$row['id'].'" id="p'.$row['id'].'" style="border-radius: 10px; border:2px black solid; padding:2px 4px; background-color: darkgray; margin-left: 70%; color: red;" >Delete</a>
+          <a href="delete.php?id='.$row['id'].'" id="p'.$row['id'].'" style="border-radius: 10px; border:2px black solid; padding:2px 4px; background-color: darkgray; margin-left: 70%; color: red;" >Delete</a>
 		  </div>
 		  ';
 		  			}else{
@@ -252,7 +252,7 @@ $result = $conn->query($sql);
 		  <div id="wrapper"><p>'.$row['body'].'</p></div><br><br>
 		  <a href="likes.php?id='.$row['id'].'" id="p'.$row['id'].'" style="border-radius: 10px; border:2px black solid; padding:2px 4px; background-color: darkgray" ><span>'.$row['likes'].'</span>
 		  <span style="margin-left:10px">upvote</span></a>
-		  <a href="likes.php?id='.$row['id'].'" id="p'.$row['id'].'" style="border-radius: 10px; border:2px black solid; padding:2px 4px; background-color: darkgray; margin-left: 70%; color: red;" >Delete</a></div>';
+		  <a href="delete.php?id='.$row['id'].'" id="p'.$row['id'].'" style="border-radius: 10px; border:2px black solid; padding:2px 4px; background-color: darkgray; margin-left: 70%; color: red;" >Delete</a></div>';
 		  		}else{
 		        		  echo'<div class="feed">
 		<a href="visit.php?id='.$row['email'].'" style="color: black"><h2>'.$row['name'].'</h2></a>
@@ -283,7 +283,7 @@ $result = $conn->query($sql);
 				   width: 40px;"></a>
 				  <a href="likes.php?id='.$row['id'].'" id="p'.$row['id'].'" style="border-radius: 10px; border:2px black solid; padding:2px 4px; background-color: darkgray" ><span>'.$row['likes'].'</span>
 				  <span style="margin-left:10px">upvote</span></a>
-				  <a href="likes.php?id='.$row['id'].'" id="p'.$row['id'].'" style="border-radius: 10px; border:2px black solid; padding:2px 4px; background-color: darkgray; margin-left: 70%; color: red;" >Delete</a></div>';
+				  <a href="delete.php?id='.$row['id'].'" id="p'.$row['id'].'" style="border-radius: 10px; border:2px black solid; padding:2px 4px; background-color: darkgray; margin-left: 70%; color: red;" >Delete</a></div>';
 				  			}else{
 				  		  echo'<div class="feed">
 				<a href="visit.php?id='.$row['email'].'" style="color: black"><h2>'.$row['name'].'</h2></a>
@@ -306,7 +306,7 @@ $result = $conn->query($sql);
 				  <div id="wrapper"><p>'.$row['body'].'</p></div><br><br>
 				  <a href="likes.php?id='.$row['id'].'" id="p'.$row['id'].'" style="border-radius: 10px; border:2px black solid; padding:2px 4px; background-color: darkgray" ><span>'.$row['likes'].'</span>
 				  <span style="margin-left:10px">upvote</span></a>
-				  <a href="likes.php?id='.$row['id'].'" id="p'.$row['id'].'" style="border-radius: 10px; border:2px black solid; padding:2px 4px; background-color: darkgray; margin-left: 70%; color: red;" >Delete</a></div>';
+				  <a href="delete.php?id='.$row['id'].'" id="p'.$row['id'].'" style="border-radius: 10px; border:2px black solid; padding:2px 4px; background-color: darkgray; margin-left: 70%; color: red;" >Delete</a></div>';
 				      	}else{
 				        		
 
