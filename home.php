@@ -47,6 +47,10 @@ $result = $conn->query($sql);
                 die;
 
 			}
+			if (isset($_POST['logout'])) {
+				header('Location:http://localhost/web%20project/sign_in.php');
+				session_destroy();
+			}
 
 			if (isset($_POST['arch'])) {
 			   $_SESSION['posts']='arch';
@@ -83,12 +87,12 @@ $result = $conn->query($sql);
 	       <textarea id="postbody" name="body"  rows="4" cols="50" style="width: 100%" required></textarea><br>
 	          <input type="file" id="file" name="pdf" accept=".pdf" style="display: none;" />
    <label style=" cursor: pointer; border-radius: 10px" for="file" > <img src="pdf.png" style="height: 30px; width: 30px"> </label> <br><br>
-	       <input type="submit" name="post" value="post"> <h6 id="alert">pleas fill both inputs*</h6> <label id="cancle">Cancle</label>
+	       <input type="submit" name="pos" value="post"> <h6 id="alert">pleas fill both inputs*</h6> <label id="cancle">Cancle</label>
 
         </form>
         <?php
 
-        if (isset($_POST['post'])) {
+        if (isset($_POST['pos'])) {
         	$subject=$_POST['subject'];
         	$body=$_POST['body'];
         	$sub= filter_var($subject, FILTER_SANITIZE_STRING);
@@ -130,8 +134,8 @@ $result = $conn->query($sql);
       # die;
  
 
-                header('Location: http://localhost/web%20project/home.php'); 
-                 die;
+       header('Location: http://localhost/web%20project/home.php'); 
+        die;
           }else{
              echo "<script>alert('there was an error uploading your profile picture')</script>";
           }
@@ -151,6 +155,8 @@ $result = $conn->query($sql);
        $posted=$stmt2;
        // header('Location: http://localhost/web%20project/home.php');
        // die;
+        header('Location: http://localhost/web%20project/home.php'); 
+        die;
 
         }
     }
@@ -166,7 +172,10 @@ $result = $conn->query($sql);
 	<header>
 		<h3><b class="free">Free</b>dom Pen</h3>
 		 <div class="links">
-		 	<a href="">contact us</a>
+		 	<form method="POST">
+		 	<label for="logout" style="cursor: pointer;color: red">logout</label>
+		 	<input type="submit" name="logout" id="logout" style="display: none;">
+		 	</form>
 	</div>
 	</header>
 

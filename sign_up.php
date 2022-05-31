@@ -4,6 +4,11 @@
 session_start();
 require "connection.php";
 
+if (isset($_POST['signin'])) {
+        header('Location:http://localhost/web%20project/sign_in.php');
+        session_destroy(); 
+}
+
  ?>
 
 
@@ -87,11 +92,14 @@ require "connection.php";
 <header>
     <h3><b class="free">Free</b>dom Pen</h3>
      <div class="links">
-      <a href="">contact us</a>
+      <label for="signin" style="cursor: pointer;">Sign in</label>
   </div>
   </header>
 
+      <form method="POST">
 
+      <input type="submit" name="signin" id="signin" style="display: none;">
+      </form>
 	
     <div class="signe-up">
 

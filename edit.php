@@ -38,13 +38,6 @@ $name= explode(" " , $user['name'])
 	</div>
 	</header>
  <form method="post" enctype="multipart/form-data">
-   	<script type="text/javascript">
-    function  selectimage(e){
-      var file=e.target.files[0]
-        console.log(file)
-        console.log(typeof(file))
-      }
-    </script>
    <div class="stuff">
 
 

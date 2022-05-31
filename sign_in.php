@@ -11,10 +11,10 @@ require "connection.php";
 <head>
 	<title>signe in</title>
 	<link rel="stylesheet" href="sign_in.css">
+
 </head>
 <body>
 
-	
 <header>
 		<h3><b class="free">Free</b>dom Pen</h3>
 		 <div class="links">
@@ -67,6 +67,11 @@ document.getElementById('sign-up').style.color = '#DC143C';
 
 ?>
 
+
+
+    </div>
+    <div style="height: 30vh">
+      
 
 
     </div>
