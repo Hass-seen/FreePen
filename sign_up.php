@@ -56,12 +56,13 @@ if (isset($_POST['signin'])) {
       
        $name=$fname ." ".$lname;
        
-       $passwo= $_POST['Password'];
+       $pass= $_POST['Password'];
 
 
        $name   = filter_var($name, FILTER_SANITIZE_STRING);
       
-       $pass   = filter_var($passwo, FILTER_SANITIZE_STRING);
+       $pass   = filter_var($pass, FILTER_SANITIZE_STRING);
+       $pass = PASSWORD_HASH($pass, PASSWORD_DEFAULT);
        $PFP    ="pfps/pfp.png";
        $status ="......";
        $field  ="......";

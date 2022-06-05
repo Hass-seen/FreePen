@@ -105,7 +105,7 @@ $name= explode(" " , $user['name'])
       $status = filter_var($sta, FILTER_SANITIZE_STRING);
       $bio =    filter_var($b, FILTER_SANITIZE_STRING); 
       $feild = filter_var($fe, FILTER_SANITIZE_STRING);
-
+     #cheks if the user uploaded an image 
       if($_FILES['pfp']['tmp_name']!=""){
         $file=$_FILES["pfp"];
         $fileName=$_FILES["pfp"]['name'];
@@ -118,7 +118,7 @@ $name= explode(" " , $user['name'])
         $fileActualExt= strtolower(end($fileExt));
 
         $allowed= array('jpg','jpeg','png');
-
+        #cheks is the uploaded file isof the correct type 
         if (in_array($fileActualExt, $allowed)) {
 
           if ($fileError===0) {
@@ -129,7 +129,7 @@ $name= explode(" " , $user['name'])
 
             move_uploaded_file($fileTmpName, $fileDestination);
 
-            
+            #updates the feidls acording to the imputed information 
         $sql = 'UPDATE user SET name=?, status=?, bio=?, field=?, pfp=?  WHERE email=?';
         $stmt = $conn->prepare($sql); 
         $stmt->bind_param("ssssss",$name,$status,$bio,$feild,$fileDestination, $email);

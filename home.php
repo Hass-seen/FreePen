@@ -1,6 +1,6 @@
 <?php
 
-session_start();
+		session_start();
 require "connection.php";
 
    $email=$_SESSION['email'];
@@ -11,7 +11,6 @@ $stmt->bind_param("s", $email);
 $stmt->execute();
 $result = $stmt->get_result(); 
 $user = $result->fetch_assoc();
-
 if ($display=='all') {
 	$sql = "SELECT * FROM posts ORDER BY id DESC";
 $result = $conn->query($sql);
@@ -24,7 +23,7 @@ $result = $conn->query($sql);
 	$result = $conn->query($sql);
 }
 
-     
+            #addes the refreashing capabuilie to the refresh button where the diplay 'all' is to get all posts, and 'word'='' is to filert acording to no words 
           if (isset($_POST['ref'])) {
           	 $_SESSION['posts']='all';
           	 $_SESSION['word']='';
@@ -32,6 +31,7 @@ $result = $conn->query($sql);
              die;
           }
 
+        #switches the display option to 'tren' which will affect the selection op posts with ones having the most likes apearing on the top of the post feed 
 		if (isset($_POST['tren'])) {
 			   $_SESSION['posts']='tren';
 			   $_SESSION['word']='';
@@ -39,7 +39,7 @@ $result = $conn->query($sql);
                die;
            }
 
-
+                #switches the 'word' to the one present in the search input so the diplaying of posts will be filtered according to it
                	if (isset($_POST['srch'])) {
 				$_SESSION['word']= $_POST['srch'];
 				$_SESSION['posts']="all";
@@ -47,18 +47,20 @@ $result = $conn->query($sql);
                 die;
 
 			}
+            #loges the user out of the session sends them to sign in
 			if (isset($_POST['logout'])) {
 				header('Location:http://localhost/web%20project/sign_in.php');
 				session_destroy();
 			}
 
+            #chenges the diplay to show only posts by the owner of the session 
 			if (isset($_POST['arch'])) {
 			   $_SESSION['posts']='arch';
 			   $_SESSION['word']='';
                header('Location:http://localhost/web%20project/home.php');
                die;
 			}
-
+             #sends the user to the page where they can edit their porfile 
 			 if (isset($_POST['edit'])) {
               	     $_SESSION['email']=$email;
                      header('Location:http://localhost/web%20project/edit.php');
@@ -78,7 +80,7 @@ $result = $conn->query($sql);
 </head>
 <body>
 
-  
+ <!--   the dive where the user can create posts  -->
     <div class="poster"> 
         <form method="post" enctype="multipart/form-data">
 	      <h4>Subject:</h4>
@@ -91,7 +93,7 @@ $result = $conn->query($sql);
 
         </form>
         <?php
-
+         #addes the post the user created to the database 
         if (isset($_POST['pos'])) {
         	$subject=$_POST['subject'];
         	$body=$_POST['body'];
@@ -180,6 +182,7 @@ $result = $conn->query($sql);
 	</header>
 
    <div class="container" >
+   	<!-- user's information is presented in this div -->
 	<div class="left" >
 		<?php echo '<img src="'.$user['pfp'].'" class="pfp">';?>
 	 
@@ -203,8 +206,9 @@ $result = $conn->query($sql);
 
 	</div>
 
-
+    <!-- the main diplay of the website -->
 	<div class="center" style="overflow-x: hidden;">
+		<!-- in this dive the three buttons of post, refresh and zoom are implimented -->
 	<div>
 		<div class="head" style=" width: 100%">
 <form method="post">
@@ -217,13 +221,17 @@ $result = $conn->query($sql);
 
 </form>
 	</div>
+	<!-- this is where the posts will be presented to the user -->
 		<div class="posts">
-
+             <!-- cheks if the selection of the posts in not empty -->
 			<?php if($result->num_rows > 0) {
-
+       #loops for the leangth of the selected posts, and fetches each as an associate arry
   while($row = $result->fetch_assoc()) {
-  	if ($_SESSION['word']=='') {
+  	#cheks if there is any word that is being searched for
+  	if ($_SESSION['word']=='') { 
+  		#cheks if the post has an attached PDF file 
   		if ($row['pdf']!='') {
+  			        #addes a delete button to the posts made by the user does not if not made by the user
 		  			if ($row['email']==$email) {
 		  				  		  echo'<div class="feed">
 		<a href="visit.php?id='.$row['email'].'" style="color: black"><h2>'.$row['name'].'</h2></a>
@@ -251,7 +259,7 @@ $result = $conn->query($sql);
 		  <span style="margin-left:10px">upvote</span></a></div>';
 		      }
   }else{
-
+                 #addes a link that will lead to the attached pdf file, and addes a delete button to the posts done by the user 
 		  		if ($row['email']==$email) {
 		  			        		  echo'<div class="feed">
 		<a href="visit.php?id='.$row['email'].'" style="color: black"><h2>'.$row['name'].'</h2></a>
@@ -278,21 +286,23 @@ $result = $conn->query($sql);
        }
 
   	}else{
-
+          #filets posts acording to the word present in the session variable "word"
 		 if(strpos($row['body'], $_SESSION['word'])!== false){
+		 	#cheks if the post has an attached pdf file 
 		  		if ($row['pdf']!='') {
+		  			#addes a delete button to the posts belonging to the user 
 				  			if ($row['email']==$email) {
-				  						  		  echo'<div class="feed">
-				<a href="visit.php?id='.$row['email'].'" style="color: black"><h2>'.$row['name'].'</h2></a>
+						  						  		  echo'<div class="feed">
+							<a href="visit.php?id='.$row['email'].'" style="color: black"><h2>'.$row['name'].'</h2></a>
 
-				<h6>'.$row['email'].'</h6> <br>
-				  <h4>'.$row['subject'].'</h4>
-				  <div id="wrapper"><p>'.$row['body'].'</p></div><br><br>
-				  <a href="'.$row['pdf'].'" target="_blank"><img src="pdf.png" style="   height: 40px;
-				   width: 40px;"></a>
-				  <a href="likes.php?id='.$row['id'].'" id="p'.$row['id'].'" style="border-radius: 10px; border:2px black solid; padding:2px 4px; background-color: darkgray" ><span>'.$row['likes'].'</span>
-				  <span style="margin-left:10px">upvote</span></a>
-				  <a href="delete.php?id='.$row['id'].'" id="p'.$row['id'].'" style="border-radius: 10px; border:2px black solid; padding:2px 4px; background-color: darkgray; margin-left: 70%; color: red;" >Delete</a></div>';
+							<h6>'.$row['email'].'</h6> <br>
+							  <h4>'.$row['subject'].'</h4>
+							  <div id="wrapper"><p>'.$row['body'].'</p></div><br><br>
+							  <a href="'.$row['pdf'].'" target="_blank"><img src="pdf.png" style="   height: 40px;
+							   width: 40px;"></a>
+							  <a href="likes.php?id='.$row['id'].'" id="p'.$row['id'].'" style="border-radius: 10px; border:2px black solid; padding:2px 4px; background-color: darkgray" ><span>'.$row['likes'].'</span>
+							  <span style="margin-left:10px">upvote</span></a>
+							  <a href="delete.php?id='.$row['id'].'" id="p'.$row['id'].'" style="border-radius: 10px; border:2px black solid; padding:2px 4px; background-color: darkgray; margin-left: 70%; color: red;" >Delete</a></div>';
 				  			}else{
 				  		  echo'<div class="feed">
 				<a href="visit.php?id='.$row['email'].'" style="color: black"><h2>'.$row['name'].'</h2></a>
@@ -305,7 +315,7 @@ $result = $conn->query($sql);
 				  <a href="likes.php?id='.$row['id'].'" id="p'.$row['id'].'" style="border-radius: 10px; border:2px black solid; padding:2px 4px; background-color: darkgray" ><span>'.$row['likes'].'</span>
 				  <span style="margin-left:10px">upvote</span></a></div>';
 				     }
-		      }else{
+		      }else{ #addes a link leading to the PDF attached to the post and a delete button if the post was made by the user 
 				      	if ($row['email']==$email) {
 				      				        		  echo'<div class="feed">
 				<a href="visit.php?id='.$row['email'].'" style="color: black"><h2>'.$row['name'].'</h2></a>
@@ -349,7 +359,7 @@ $result = $conn->query($sql);
 </div>
 		
 	</div>
-
+     <!-- the option bar of the website  -->
 	<div class="right" style="	height: 50vh;">
 		<form method="post" >
 		<ul>

@@ -3,7 +3,6 @@
 
 session_start();
 require "connection.php";
-
  ?>
 
 <!DOCTYPE html>
@@ -11,6 +10,16 @@ require "connection.php";
 <head>
 	<title>signe in</title>
 	<link rel="stylesheet" href="sign_in.css">
+  <style type="text/css">
+    body{
+  size: 100%;
+  height: 100%;
+  background-image: url(sign-in.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+  </style>
 
 </head>
 <body>
@@ -38,6 +47,7 @@ if (isset($_POST['in'])) {
 	         $pass= $_POST['Password'];
 
         $email  = filter_var($Em, FILTER_SANITIZE_EMAIL);
+        $pass= filter_var($pass,  FILTER_SANITIZE_STRING);
 
          $sql = "SELECT * FROM user WHERE email=?"; 
          $stmt = $conn->prepare($sql); 
@@ -47,14 +57,17 @@ if (isset($_POST['in'])) {
          $user = $result->fetch_assoc();
 
          if(isset($user['email'])!=Null){
-         	if ($pass==$user['password']) {
+             #$password=$user['password'];
+         	if (password_verify($pass,$user['password'])) {
          		       $_SESSION['email']=$email;
                    $_SESSION['posts']='all';
                    $_SESSION['word']='';
-               header('Location: http://localhost/web%20project/home.php');
+             header('Location: http://localhost/web%20project/home.php');
              die;
          	}else{
-         	echo "<script>alert('Password is incorect')</script>";
+                     echo "<script>alert('incorrect password');</script>";
+          header('Location: http://localhost/web%20project/sign_in.php');
+             die;
          	}
 
          }else{
