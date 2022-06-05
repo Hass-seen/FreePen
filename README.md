@@ -28,5 +28,33 @@ reporters all around the globe.
 
 ## Goals:
 
+* widespread use
+* become a place of growth for small reporters 
+* be a GitHub for journalists 
+* be views as a platform for trusted news and information acquisition
+
+
+
+
+## structure:
+
+### home.php:
+
+    is the main page of the website, everything revolves around it
+    it offers the user the full features of Freedom Pen, by presenting posts
+    allowing for searching for a spacific topic, sorting by trending, making new
+    posts, and is the webpage where the user will spend most of their time on the website 
+
+### sign_in/up.php:
+
+    Where the user will creat an account, and then access it in the future 
+
+### Edit.php:
+    the webpage that allows the user to edit thier personal profile information 
+
+### visit.php:
+
+    the page that will apear when visiting another user's home page 
+
 
 
